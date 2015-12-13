@@ -1,0 +1,199 @@
+---
+sl_distribution:
+  Debian:
+    - name: main
+      optional: False
+      releases:
+        - versions: [6, 7, 8]
+          url: http://ftp.debian.org/debian/
+          components: ['main', 'contrib', 'non-free']
+    - name: updates
+      optional: False
+      releases:
+        - versions: [6, 7, 8]
+          url: http://ftp.debian.org/debian/
+          distribution_postfix: -updates
+          components: ['main', 'contrib', 'non-free']
+    - name: backports
+      optional: True
+      releases:
+        - versions: [7, 8]
+          url: http://http.debian.net/debian
+          distribution_postfix: -backports
+          components: ['main']
+    - name: security
+      optional: False
+      releases:
+        - versions: [6, 7, 8]
+          url: http://security.debian.org/
+          distribution_postfix: /updates
+          components: ['main', 'contrib', 'non-free']
+    - name: winswitch
+      optional: True
+      releases:
+        - versions: [6, 7, 8]
+          url: http://winswitch.org/
+          components: ['main']
+    - name: x2go
+      optional: True
+      key_server: keys.gnupg.net
+      key_id: E1F958385BFE2B6E
+      releases:
+        - versions: [6, 7, 8]
+          url: http://deb http://packages.x2go.org/debian
+          components: ['main']
+    - name: nodejs-0.12
+      optional: True
+      key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      key_id: 1655A0AB68576280
+      releases:
+        - versions: [7,8]
+          url: https://deb.nodesource.com/node_0.12
+          components: ['main']
+  Ubuntu:
+    - name: main
+      optional: False
+      releases:
+        - versions: [10, 12, 14]
+          url: http://es.archive.ubuntu.com/ubuntu/
+          components: ['main', 'restricted', 'universe', 'multiverse']
+    - name: updates
+      optional: False
+      releases:
+        - versions: [12, 14]
+          url: http://es.archive.ubuntu.com/ubuntu/
+          distribution_postfix: -updates
+          components: ['main', 'restricted', 'universe', 'multiverse']
+    - name: security
+      optional: False
+      releases:
+        - versions: [10, 12, 14]
+          url: http://security.ubuntu.com/ubuntu/
+          distribution_postfix: -security
+          components: ['main', 'restricted', 'universe', 'multiverse']
+    - name: backports
+      optional: True
+      releases:
+        - versions: [10, 12, 14]
+          url: http://es.archive.ubuntu.com/ubuntu/
+          distribution_postfix: -backports
+          components: ['main', 'restricted', 'universe', 'multiverse']
+    - name: partner
+      optional: True
+      releases:
+        - versions: [10, 12, 14]
+          url: http://archive.canonical.com/ubuntu/
+          components: ['partner']
+    - name: extras
+      optional: True
+      key_id: 16126D3A3E5C1192
+      key_server: keyserver.ubuntu.com
+      releases:
+        - versions: [12, 14]
+          url: http://extras.ubuntu.com/ubuntu/
+          components: ['main']
+    - name: libreoffice
+      optional: True
+      key_id: 1378B444
+      key_server: keyserver.ubuntu.com
+      releases:
+        - versions: [12, 14]
+          url: http://ppa.launchpad.net/libreoffice/ppa/ubuntu/
+          components: ['main']
+    - name: wine
+      optional: True
+      key_server: keyserver.ubuntu.com
+      key_id: F9CB8DB0
+      releases:
+        - versions: [10, 12, 14]
+          url: http://ppa.launchpad.net/ubuntu-wine/ppa/ubuntu/
+          components: ['main']
+    - name: i3
+      optional: True
+      key_package: sur5r-keyring
+      releases:
+        - versions: [12, 14]
+          url: http://debian.sur5r.net/i3/
+          components: ['universe']
+    - name: google chrome
+      optional: True
+      key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+      key_id: A040830F7FAC5991
+      releases:
+        - versions: [12, 14]
+          url: http://dl.google.com/linux/chrome/deb/
+          distribution: stable
+          components: ['main']
+    - name: oracle java
+      optional: True
+      key_server: keyserver.ubuntu.com
+      key_id: C2518248EEA14886
+      releases:
+        - versions: [12, 14]
+          url: http://ppa.launchpad.net/webupd8team/java/ubuntu
+          components: ['main']
+    - name: owncloud
+      optional: True
+      key_url: http://download.opensuse.org/repositories/isv:ownCloud:community/Ubuntu_14.04/Release.key
+      key_id: 977C43A8BA684223
+      releases:
+        - versions: [14]
+          url: http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_14.04/
+          distribution: /
+          components: []
+    - name: owncloud
+      optional: True
+      key_url: http://download.opensuse.org/repositories/isv:ownCloud:community/Ubuntu_12.04/Release.key
+      key_id: 977C43A8BA684223
+      releases:
+        - versions: [12]
+          url: http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_12.04/
+          distribution: /
+          components: []
+    - name: winswitch
+      optional: True
+      releases:
+        - versions: [12, 14]
+          url: http://winswitch.org/
+          components: ['main']
+    - name: x2go
+      optional: True
+      key_server: keyserver.ubuntu.com
+      key_id: 7CDE3A860A53F9FD
+      releases:
+        - versions: [12, 14]
+          url: http://ppa.launchpad.net/x2go/stable/ubuntu
+          components: ['main']
+    - name: nodejs-0.12
+      optional: True
+      key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      key_id: 1655A0AB68576280
+      releases:
+        - versions: [10,12,14]
+          url: https://deb.nodesource.com/node_0.12
+          components: ['main']
+    - name: getdeb
+      optional: True
+      key_url: http://archive.getdeb.net/getdeb-archive.key
+      key_id: A8A515F046D7E7CF
+      releases:
+        - versions: [10,12,14]
+          url: http://archive.getdeb.net/ubuntu
+          distribution_postfix: -getdeb
+          components: ['apps']
+    - name: playonlinux
+      optional: True
+      key_server: keyserver.ubuntu.com
+      key_id: E0F72778C4676186
+      releases:
+        - versions: [10, 12, 14]
+          url: http://deb.playonlinux.com/
+          components: ['main']
+  # Need this to avoid failing tasks that uses
+  # with_subelements:                                                             
+  #   - sl_distribution[ansible_distribution]                                     
+  #   - releases  
+  CentOS:
+    - name: void
+      releases:
+        - void

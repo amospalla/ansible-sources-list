@@ -1,0 +1,101 @@
+---
+- name: Check if sources.list is managed by Ansible
+  command: grep -q "^# File managed by Ansible" /etc/apt/sources.list
+  register: output
+  changed_when: false
+  failed_when: false
+
+- name: Install apt-transport-https
+  apt:
+    update_cache: yes
+    state: present
+    install_recommends: no
+    name: apt-transport-https
+    cache_valid_time: 86400
+
+- name: Backup original sources.list
+  command: cp /etc/apt/sources.list /etc/apt/sources.list.original_moved_by_ansible
+  when: output.rc != 0
+
+- name: Generate sources.list
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    mode: 0644
+  register: template_sources_list
+
+- name: Install keys from url
+  apt_key:
+    url: "{{ item.0.key_url }}"
+    id: "{{ item.0.key_id }}"
+    validate_certs: no
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_use_optional_repositories is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_use_optional_repositories ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.0.key_url is defined and
+        item.0.key_id is defined
+
+- name: Install keys from keyserver
+  apt_key:
+    keyserver: "{{ item.0.key_server }}"
+    id: "{{ item.0.key_id }}"
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_use_optional_repositories is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_use_optional_repositories ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.0.key_server is defined and
+        item.0.key_id is defined
+
+# do not update cache, so is executed only when the templated sources list was different
+- name: Install keys from package
+  apt:
+    update_cache: yes
+    state: present
+    install_recommends: no
+    name: "{{ item.0.key_package }}"
+    force: True
+    # cache_valid_time: 86400
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_use_optional_repositories is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_use_optional_repositories ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.0.key_package is defined and
+        generate_sources_list.changed
+
+# update cache, try to install it again
+- name: Install keys from package (from cache)
+  apt:
+    update_cache: yes
+    state: present
+    install_recommends: no
+    name: "{{ item.0.key_package }}"
+    force: True
+    cache_valid_time: 86400
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_use_optional_repositories is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_use_optional_repositories ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.0.key_package is defined
+
+- name: Set proxy
+  template:
+    src: proxy.j2
+    dest: /etc/apt/apt.conf.d/02proxy
+    mode: 0644
+  when: sources_list_use_proxy|default(False)
+
+- name: Remove proxy
+  file:
+    dest: /etc/apt/apt.conf.d/02proxy
+    state: absent
+  when: not sources_list_use_proxy|default(False)
