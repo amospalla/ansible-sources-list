@@ -3,15 +3,15 @@
 
 ## Description
 
-This role generates the file sources.list for Debian 7/8 and Ubuntu 12.04 / 14.04 / 16.04 distributions.
+This role generates the file sources.list for Debian 7/8 and Ubuntu 12.04/14.04/16.04 distributions.
 
 It has a fixed set of repositories which are mandatory (like main and updates), and a set of optional repositories which can be selected with variables.
 
 All repositories are written on sources.list file, no file is created under sources.list.d folder.
 
-By default any file under sources.list.d folder which contain a similar line already on a new sources.list generated file are deleted. This can be disabled with _sources_list_remove_duplicates_: False.
+By default any file under sources.list.d folder which contains a similar line already on a new sources.list generated file is deleted. This can be disabled with _sources_list_remove_duplicates_: False.
 
-List of repositories in the role:
+List of managed repositories:
 
 ```
 + ------------- + ------ + ------ + ------ + ------ + ------ +
