@@ -48,7 +48,7 @@
 {%  endmacro %}
 
 {%- if sources_list_repositories is defined %}
-{%      for entry in sl_distribution[ansible_distribution] + sources_list_repositories %}
+{%      for entry in sl_distribution[ansible_distribution] + sources_list_repositories[ansible_distribution] %}
 {{          print_repository(entry) }}
 {%      endfor %}
 {%  else %}
