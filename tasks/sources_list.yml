@@ -1,0 +1,92 @@
+---
+- name: Check if sources.list is managed by Ansible
+  command: grep -q "^# Ansible managed" /etc/apt/sources.list
+  register: sources_list_managed_by_ansible
+  changed_when: false
+  failed_when: false
+
+- name: Backup original sources.list
+  command: cp /etc/apt/sources.list /etc/apt/sources.list.original_moved_by_ansible
+  when: sources_list_managed_by_ansible.rc != 0
+
+- name: Install apt-transport-https and ca-certificates
+  apt:
+    update_cache: yes
+    state: present
+    install_recommends: no
+    name: "{{ item }}"
+    cache_valid_time: 86400
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: Generate sources.list
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    mode: 0644
+  register: template_sources_list
+
+- name: Remove duplicate sources.list.d/ files | Copy helper
+  copy:
+    src: sources-list-remove-duplicates.sh
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Remove duplicate sources.list.d/ files | Execute
+  command: /usr/local/bin/sources-list-remove-duplicates.sh
+  changed_when: False
+  failed_when: False
+  register: register_sources_list_remove_duplicates
+
+- name: Remove duplicate sources.list.d/ files
+  debug:
+    msg: "sources-list-remove-duplicates exit code: {{ register_sources_list_remove_duplicates.rc }}"
+  failed_when: register_sources_list_remove_duplicates.rc == 1
+  changed_when: register_sources_list_remove_duplicates.rc == 100
+
+- name: Install keys from url
+  apt_key:
+    url: "{{ item.1.key_url }}"
+    id: "{{ item.1.key_id }}"
+    validate_certs: no
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_repositories_optional is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.1.key_url is defined and
+        item.1.key_id is defined
+
+- name: Install keys from keyserver
+  apt_key:
+    keyserver: "{{ item.1.key_server }}"
+    id: "{{ item.1.key_id }}"
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_repositories_optional is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.1.key_server is defined and
+        item.1.key_id is defined
+
+- name: Install keys from package
+  apt:
+    update_cache: yes
+    state: present
+    install_recommends: no
+    name: "{{ item.1.key_package }}"
+    allow_unauthenticated: True
+    force: True
+  with_subelements:
+    - sl_distribution[ansible_distribution]
+    - releases
+  when: sources_list_repositories_optional is defined and
+        ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
+        ansible_distribution_major_version|int in item.1.versions and
+        item.1.key_package is defined

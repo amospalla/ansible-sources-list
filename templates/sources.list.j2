@@ -1,50 +1,58 @@
-# File managed by Ansible
-
-{%- set enabled = {}  %}
-
-{%- macro distribution_release() %}
+# {{ ansible_managed }}
+{%  set enabled = {}  %}
+{%  macro distribution_release() %}
 {#  debian 6 has no ansible_distribution_release #}
-{%  if ansible_distribution == 'Debian' and ansible_distribution_major_version == '6' %}
-squeeze
-{%- else %}
+{#  if ansible_distribution == 'Debian' and ansible_distribution_major_version == '6' #}
+{# squeeze #}
+{#  else #}
 {{  ansible_distribution_release }}
-{%- endif %}
+{#- endif #}
 {%  endmacro -%}
 
+{# ie: gets called with entry='Debian.entry0' #}
 {%  macro get_enabled(entry) %}
 {%  for release in entry.releases %}
 {%      if ansible_distribution_major_version|int in release.versions %}
 {%          if not entry.optional %}
 {%              set _ = enabled.update({'use': True}) %}
-{%          elif entry.optional and sources_list_use_optional_repositories is defined and entry.name in sources_list_use_optional_repositories %}
+{%          elif entry.optional and sources_list_repositories_optional is defined and entry.name in sources_list_repositories_optional %}
 {%              set _ = enabled.update({'use': True}) %}
-{%          else %}
-{%              set _ = enabled.update({'use': False}) %}
 {%          endif %}
-{%      else %}
-{%          set _ = enabled.update({'use': False}) %}
 {%      endif %}
 {%  endfor %}
 {%  endmacro -%}
 
-{%- macro print_repository(entry) %}
-{{  get_enabled(entry) }}
+{# ie: gets called with entry='Debian.entry0' #}
+{%  macro print_repository(entry) %}
+{%  set _ = enabled.update({'use': False}) %}
+{{  get_enabled(entry) -}}
 {%  if enabled.use %}
 {%      for release in entry.releases %}
-{{          'deb ' }}{{ release.url }} {{ release.distribution|default(distribution_release()) }}{{ release.distribution_postfix|default() }}
-{%-         for component in release.components %}
-{{              ' ' }}{{ component }}
-{%-         endfor %}
-{%-     endfor %}
+{%          if ansible_distribution_major_version|int in release.versions %}
+#                 {{- " " + entry.comment }}
+{{              'deb' }} {% if release.arch is defined %}[arch={{ release.arch }}] {% endif %}{{ release.url }} {{ release.distribution|default(distribution_release()) }}{{ release.distribution_postfix|default() }}
+{%-             for component in release.components %}
+{{                  ' ' }}{{ component }}
+{%-             endfor %}
+{%              if sources_list_enable_sources and entry.src|default(False) %}
+
+{{                  'deb-src' }} {% if release.arch is defined %}[arch={{ release.arch }}] {% endif %}{{ release.url }} {{ release.distribution|default(distribution_release()) }}{{ release.distribution_postfix|default() }}
+{%-                 for component in release.components %}
+{{                      ' ' }}{{ component }}
+{%-                 endfor %}
+{%              endif %}
+
+{%          endif %}
+{%      endfor %}
 {%  endif %}
 {%  endmacro %}
 
 {%- if sources_list_repositories is defined %}
 {%      for entry in sl_distribution[ansible_distribution] + sources_list_repositories %}
 {{          print_repository(entry) }}
-{%-     endfor %}
+{%      endfor %}
 {%  else %}
 {%      for entry in sl_distribution[ansible_distribution] %}
 {{          print_repository(entry) }}
 {%-     endfor %}
-{%- endif %}
+{%  endif %}

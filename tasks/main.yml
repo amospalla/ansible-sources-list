@@ -1,4 +1,4 @@
 ---
-- include: only_debian.yml
+- include: sources_list.yml
   when: ansible_os_family == 'Debian'
   tags: sources-list
