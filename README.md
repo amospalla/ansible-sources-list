@@ -64,6 +64,7 @@ List of repositories in the role:
 ```
 
 Y: Mandatory repository
+
 O: Optional repository
 
 ## Variables
