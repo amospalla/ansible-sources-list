@@ -50,11 +50,8 @@ sl_distribution:
           url: http://www.deb-multimedia.org
           components: ['main', 'non-free']
           distribution: stable
-          # key_pacakge: deb-multimedia-keyring
           key_server: keyserver.ubuntu.com
           key_id: 5C808C2B65558117
-          # key_url: http://winswitch.org/gpg.asc
-          # key_id: 18ADB31CF18AD6BB
     - name: google_chrome
       optional: True
       comment: 3rd party Google Chrome browser
@@ -228,7 +225,6 @@ sl_distribution:
     - name: i3
       optional: True
       comment: 3rd party i3 window manager
-      # key_package: sur5r-keyring
       releases:
         - versions: [12, 14, 16]
           url: http://debian.sur5r.net/i3/
