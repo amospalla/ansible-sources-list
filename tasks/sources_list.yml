@@ -54,7 +54,7 @@
     id: "{{ item.1.key_id }}"
     validate_certs: no
   with_subelements:
-    - sl_distribution[ansible_distribution]
+    - sources_list_repositories[ansible_distribution]
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
@@ -67,7 +67,7 @@
     keyserver: "{{ item.1.key_server }}"
     id: "{{ item.1.key_id }}"
   with_subelements:
-    - sl_distribution[ansible_distribution]
+    - sources_list_repositories[ansible_distribution]
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
@@ -84,7 +84,7 @@
     allow_unauthenticated: True
     force: True
   with_subelements:
-    - sl_distribution[ansible_distribution]
+    - sources_list_repositories[ansible_distribution]
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and

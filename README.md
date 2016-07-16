@@ -74,7 +74,7 @@ There are no mandatory variables.
 - _sources_list_repositories_optional_: list with optional repositories to use.
 - _sources_list_enable_sources_: enable generation of deb-src entries (default: True)
 - _sources_list_remove_duplicates_: remove already existing sources.list.d/ files which duplicate a repository on sources.list file (default: True).
-- _sources_list_repositories_: dictionary with custom respositories definitions. It follows the same structure as _sl_distribution_ dictionary on vars/main.yml file.
+- _sources_list_repositories_: dictionary with respositories definitions. Check it on defaults/main.yml file.
 ```
 sources_list_repositories:
   - name:

@@ -47,12 +47,6 @@
 {%  endif %}
 {%  endmacro %}
 
-{%- if sources_list_repositories is defined %}
-{%      for entry in sl_distribution[ansible_distribution] + sources_list_repositories[ansible_distribution] %}
-{{          print_repository(entry) }}
-{%      endfor %}
-{%  else %}
-{%      for entry in sl_distribution[ansible_distribution] %}
-{{          print_repository(entry) }}
-{%-     endfor %}
-{%  endif %}
+{%  for entry in sources_list_repositories[ansible_distribution] %}
+{{      print_repository(entry) }}
+{%- endfor %}
