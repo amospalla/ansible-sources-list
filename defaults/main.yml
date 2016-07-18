@@ -59,6 +59,7 @@ sources_list_repositories:
       comment: 3rd party Google Chrome browser
       releases:
         - versions: [8]
+          arch: amd64
           url: http://dl.google.com/linux/chrome/deb/
           distribution: stable
           components: ['main']
