@@ -192,6 +192,15 @@ sources_list_repositories:
           components: ['main']
           key_id: 16126D3A3E5C1192
           key_server: keyserver.ubuntu.com
+    - name: ceph_jewel
+      optional: True
+      comment: ceph_jewel
+      releases:
+        - versions: [14]
+          url: http://download.ceph.com/debian-jewel/
+          components: ['main']
+          key_id: E84AC2C0460F3994
+          key_server: keyserver.ubuntu.com
     - name: libreoffice
       optional: True
       comment: 3rd party Libreoffice
