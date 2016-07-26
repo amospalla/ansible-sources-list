@@ -1,14 +1,4 @@
 ---
-- name: Check if sources.list is managed by Ansible
-  command: grep -q "^# Ansible managed" /etc/apt/sources.list
-  register: sources_list_managed_by_ansible
-  changed_when: false
-  failed_when: false
-
-- name: Backup original sources.list
-  command: cp /etc/apt/sources.list /etc/apt/sources.list.original_moved_by_ansible
-  when: sources_list_managed_by_ansible.rc != 0
-
 - name: Install apt-transport-https and ca-certificates
   apt:
     update_cache: yes
@@ -19,6 +9,16 @@
   with_items:
     - apt-transport-https
     - ca-certificates
+
+- name: Check if sources.list is managed by Ansible
+  command: grep -q "^# Ansible managed" /etc/apt/sources.list
+  register: sources_list_managed_by_ansible
+  changed_when: false
+  failed_when: false
+
+- name: Backup original sources.list
+  command: cp /etc/apt/sources.list /etc/apt/sources.list.original_moved_by_ansible
+  when: sources_list_managed_by_ansible.rc != 0
 
 - name: Generate sources.list
   template:
