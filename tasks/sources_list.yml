@@ -58,7 +58,7 @@
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
-        ansible_distribution_major_version|int in item.1.versions and
+        ansible_distribution_major_version in item.1.versions and
         item.1.key_url is defined and
         item.1.key_id is defined
 
@@ -71,7 +71,7 @@
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
-        ansible_distribution_major_version|int in item.1.versions and
+        ansible_distribution_major_version in item.1.versions and
         item.1.key_server is defined and
         item.1.key_id is defined
 
@@ -88,7 +88,7 @@
     - releases
   when: sources_list_repositories_optional is defined and
         ( not item.0.optional or ( item.0.name in sources_list_repositories_optional ) ) and
-        ansible_distribution_major_version|int in item.1.versions and
+        ansible_distribution_major_version in item.1.versions and
         item.1.key_package is defined
 
 - name: Update apt cache

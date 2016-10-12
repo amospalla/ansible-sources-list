@@ -8,7 +8,7 @@ sources_list_repositories:
       optional: False
       src: True
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://ftp.debian.org/debian/
           components: ['main', 'contrib', 'non-free']
     - name: updates
@@ -16,7 +16,7 @@ sources_list_repositories:
       src: True
       comment: Update Repositories
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://ftp.debian.org/debian/
           distribution_postfix: -updates
           components: ['main', 'contrib', 'non-free']
@@ -25,7 +25,7 @@ sources_list_repositories:
       optional: False
       src: True
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://security.debian.org/
           distribution_postfix: /updates
           components: ['main', 'contrib', 'non-free']
@@ -33,7 +33,7 @@ sources_list_repositories:
       optional: True
       comment: Backports
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://ftp.debian.org/debian/
           distribution_postfix: -backports
           components: ['main']
@@ -41,14 +41,14 @@ sources_list_repositories:
       optional: True
       comment: 3rd party multimedia
       releases:
-        - versions: [7]
+        - versions: ['7']
           url: http://www.deb-multimedia.org
           components: ['main', 'non-free']
           distribution: oldstable
           key_pacakge: deb-multimedia-keyring
           key_server: keyserver.ubuntu.com
           key_id: 5C808C2B65558117
-        - versions: [8]
+        - versions: ['8']
           url: http://www.deb-multimedia.org
           components: ['main', 'non-free']
           distribution: stable
@@ -58,7 +58,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Google Chrome browser
       releases:
-        - versions: [8]
+        - versions: ['8']
           arch: amd64
           url: http://dl.google.com/linux/chrome/deb/
           distribution: stable
@@ -69,7 +69,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Opera browser
       releases:
-        - versions: [7,8]
+        - versions: ['7','8']
           url: http://deb.opera.com/opera/
           distribution: sid
           components: ['non-free']
@@ -79,7 +79,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Play on Linux
       releases:
-        - versions: [8]
+        - versions: ['8']
           url: http://deb.playonlinux.com/
           components: ['main']
           key_server: keyserver.ubuntu.com
@@ -88,7 +88,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Steam
       releases:
-        - versions: [7,8]
+        - versions: ['7','8']
           arch: i386
           url: http://repo.steampowered.com/steam/
           distribution: precise
@@ -99,7 +99,7 @@ sources_list_repositories:
       optional: true
       comment: 3rd party Virtualbox
       releases:
-        - versions: [8]
+        - versions: ['8']
           url: http://download.virtualbox.org/virtualbox/debian
           components: ['contrib']
           key_url: http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc
@@ -108,7 +108,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Wine
       releases:
-        - versions: [8]
+        - versions: ['8']
           url: https://dl.winehq.org/wine-builds/debian/
           components: ['main']
           key_server: keyserver.ubuntu.com
@@ -117,7 +117,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Winswitch - Xpra
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://winswitch.org/
           components: ['main']
           key_url: http://winswitch.org/gpg.asc
@@ -126,7 +126,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party X2go
       releases:
-        - versions: [7, 8]
+        - versions: ['7', '8']
           url: http://packages.x2go.org/debian
           components: ['main']
           key_server: keys.gnupg.net
@@ -135,7 +135,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party nodejs 0.12
       releases:
-        - versions: [7,8]
+        - versions: ['7', '8']
           url: https://deb.nodesource.com/node_0.12
           components: ['main']
           key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
@@ -146,7 +146,7 @@ sources_list_repositories:
       optional: False
       src: True
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: http://es.archive.ubuntu.com/ubuntu/
           components: ['main', 'restricted', 'universe', 'multiverse']
     - name: updates
@@ -154,7 +154,7 @@ sources_list_repositories:
       src: True
       comment: Ubuntu updates repositories
       releases:
-        - versions: [12, 14, 16]
+        - versions: [12, '14', '16']
           url: http://es.archive.ubuntu.com/ubuntu/
           distribution_postfix: -updates
           components: ['main', 'restricted', 'universe', 'multiverse']
@@ -163,7 +163,7 @@ sources_list_repositories:
       src: True
       comment: Ubuntu security repositories
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: http://security.ubuntu.com/ubuntu/
           distribution_postfix: -security
           components: ['main', 'restricted', 'universe', 'multiverse']
@@ -172,7 +172,7 @@ sources_list_repositories:
       src: True
       comment: Ubuntu backport repositories
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: http://es.archive.ubuntu.com/ubuntu/
           distribution_postfix: -backports
           components: ['main', 'restricted', 'universe', 'multiverse']
@@ -180,14 +180,14 @@ sources_list_repositories:
       optional: True
       comment: Ubuntu partner repositories
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: http://archive.canonical.com/ubuntu/
           components: ['partner']
     - name: extras
       optional: True
       comment: Ubuntu extras repositories
       releases:
-        - versions: [12, 14]
+        - versions: [12, '14']
           url: http://extras.ubuntu.com/ubuntu/
           components: ['main']
           key_id: 16126D3A3E5C1192
@@ -196,7 +196,7 @@ sources_list_repositories:
       optional: True
       comment: ceph_jewel
       releases:
-        - versions: [14]
+        - versions: ['14']
           url: http://download.ceph.com/debian-jewel/
           components: ['main']
           key_id: E84AC2C0460F3994
@@ -205,7 +205,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Libreoffice
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           url: http://ppa.launchpad.net/libreoffice/ppa/ubuntu/
           components: ['main']
           key_id: 1378B444
@@ -214,12 +214,12 @@ sources_list_repositories:
       optional: true
       comment: 3rd party Virtualbox
       releases:
-        - versions: [12, 14]
+        - versions: ['12', '14']
           url: http://download.virtualbox.org/virtualbox/debian
           components: ['contrib']
           key_url: http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc
           key_id: 54422A4B98AB5139
-        - versions: [16]
+        - versions: ['16']
           url: http://download.virtualbox.org/virtualbox/debian
           components: ['contrib']
           key_url: http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc
@@ -229,7 +229,7 @@ sources_list_repositories:
       comment: 3rd party Wine
       src: True
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           url: http://ppa.launchpad.net/ubuntu-wine/ppa/ubuntu/
           components: ['main']
           key_server: keyserver.ubuntu.com
@@ -238,7 +238,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party i3 window manager
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           url: http://debian.sur5r.net/i3/
           components: ['universe']
           key_server: keyserver.ubuntu.com
@@ -247,7 +247,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Google Chrome browser
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           arch: amd64
           url: http://dl.google.com/linux/chrome/deb/
           distribution: stable
@@ -258,7 +258,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Steam
       releases:
-        - versions: [14, 16]
+        - versions: ['14', '16']
           arch: i386
           url: http://repo.steampowered.com/steam/
           distribution: precise
@@ -270,12 +270,12 @@ sources_list_repositories:
       src: True
       comment: 3rd party Oracle Java
       releases:
-        - versions: [12, 14]
+        - versions: ['12', '14']
           url: http://ppa.launchpad.net/webupd8team/java/ubuntu
           components: ['main']
           key_server: keyserver.ubuntu.com
           key_id: C2518248EEA14886
-        - versions: [16]
+        - versions: ['16']
           url: http://ppa.launchpad.net/webupd8team/java/ubuntu
           components: ['main']
           distribution: vivid
@@ -285,13 +285,13 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Owncloud
       releases:
-        - versions: [14]
+        - versions: ['14']
           url: http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_14.04/
           distribution: /
           components: []
           key_url: http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_14.04/Release.key
           key_id: 977C43A8BA684223
-        - versions: [16]
+        - versions: ['16']
           url: http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_16.04/
           distribution: /
           components: []
@@ -301,7 +301,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Winswitch - Xpra
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           url: http://winswitch.org/
           components: ['main']
           key_url: http://winswitch.org/gpg.asc
@@ -310,7 +310,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party X2go
       releases:
-        - versions: [12, 14, 16]
+        - versions: ['12', '14', '16']
           url: http://ppa.launchpad.net/x2go/stable/ubuntu
           components: ['main']
           key_server: keyserver.ubuntu.com
@@ -319,7 +319,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party nodejs-0.12
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: https://deb.nodesource.com/node_0.12
           components: ['main']
           key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
@@ -328,7 +328,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party getdeb
       releases:
-        - versions: [10, 12, 14, 16]
+        - versions: ['10', '12', '14', '16']
           url: http://archive.getdeb.net/ubuntu
           distribution_postfix: -getdeb
           components: ['apps']
@@ -338,7 +338,7 @@ sources_list_repositories:
       optional: True
       comment: 3rd party Play on Linux
       releases:
-        - versions: [10, 12, 14]
+        - versions: ['10', '12', '14']
           url: http://deb.playonlinux.com/
           components: ['main']
           key_server: keyserver.ubuntu.com

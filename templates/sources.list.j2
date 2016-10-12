@@ -12,7 +12,7 @@
 {# ie: gets called with entry='Debian.entry0' #}
 {%  macro get_enabled(entry) %}
 {%  for release in entry.releases %}
-{%      if ansible_distribution_major_version|int in release.versions %}
+{%      if ansible_distribution_major_version in release.versions %}
 {%          if not entry.optional %}
 {%              set _ = enabled.update({'use': True}) %}
 {%          elif entry.optional and sources_list_repositories_optional is defined and entry.name in sources_list_repositories_optional %}
@@ -28,7 +28,7 @@
 {{  get_enabled(entry) -}}
 {%  if enabled.use %}
 {%      for release in entry.releases %}
-{%          if ansible_distribution_major_version|int in release.versions %}
+{%          if ansible_distribution_major_version in release.versions %}
 #                 {{- " " + entry.comment }}
 {{              'deb' }} {% if release.arch is defined %}[arch={{ release.arch }}] {% endif %}{{ release.url }} {{ release.distribution|default(distribution_release()) }}{{ release.distribution_postfix|default() }}
 {%-             for component in release.components %}
